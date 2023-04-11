@@ -1,0 +1,127 @@
+/* Reset CSS */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Lato", sans-serif;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 46.5px;
+  background-color: black;
+  z-index: 1;
+}
+
+#nav {
+  display: inline-block;
+}
+
+#nav .subnav {
+  list-style: none;
+}
+
+#nav > li {
+  display: inline-block;
+  position: relative;
+}
+
+#nav > li > a {
+  text-transform: uppercase;
+}
+
+#nav li a {
+  color: white;
+  text-decoration: none;
+  line-height: 46.5px;
+  padding: 0 24px;
+  display: block;
+}
+
+#nav > li:hover > a,
+#nav .subnav li:hover a {
+  color: black;
+  background-color: #ccc;
+}
+
+#nav .subnav {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+  min-width: 160px;
+  top: 100%;
+  left: 0;
+}
+
+#nav li:hover .subnav {
+  display: block;
+}
+
+#nav .subnav a {
+  color: black;
+  padding: 8px 16px;
+  line-height: 22px;
+}
+
+#nav .nav-arrow-down {
+  font-size: 14px;
+}
+
+#header .search-btn {
+  float: right;
+  padding: 0 24px;
+}
+
+#header .search-btn:hover {
+  background-color: #f44336;
+  cursor: pointer;
+}
+
+#header .search-icon {
+  color: white;
+  font-size: 15px;
+  line-height: 46.5px;
+}
+
+#slider {
+  position: relative;
+  margin-top: 46.5px;
+  padding-top: 50%;
+  background: url("https://www.w3schools.com/w3images/chicago.jpg") top center /
+    cover no-repeat;
+}
+
+#slider .text-content {
+  position: absolute;
+  bottom: 47px;
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+#slider .text-heading {
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+#slider .text-description {
+  font-size: 15px;
+}
+
+#container {
+}
+
+#content {
+}
+
+#footer {
+}
