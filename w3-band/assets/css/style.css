@@ -13,6 +13,31 @@ html {
   clear: both;
 }
 
+.row {
+  margin: 0 -8px;
+}
+
+.column {
+  float: left;
+  padding: 0 8px;
+}
+
+.column-half {
+  width: 50%;
+}
+
+.column-full {
+  width: 100%;
+}
+
+.mt-8 {
+  margin-top: 8px !important;
+}
+
+.mt-16 {
+  margin-top: 16px !important;
+}
+
 #header {
   position: fixed;
   top: 0;
@@ -210,13 +235,12 @@ html {
 }
 
 .tour-section .places-list {
-  margin: 32px -8px 48px;
+  margin-top: 32px;
+  margin-bottom: 48px;
 }
 
 .tour-section .place-item {
-  float: left;
   width: 33.33333%;
-  padding: 0 8px;
 }
 
 .tour-section .place-item .place-img {
@@ -254,6 +278,8 @@ html {
   text-decoration: none;
   color: white;
   display: inline-block;
+  border: none;
+  cursor: pointer;
 }
 
 .tour-section .place-content .place-buy-btn:hover {
@@ -267,9 +293,13 @@ html {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+}
+
+.modal-open {
+  display: flex;
 }
 
 .modal .modal-container {
@@ -277,6 +307,7 @@ html {
   width: 900px;
   min-height: 200px;
   position: relative;
+  animation: modalFadeIn ease 0.3s;
 }
 
 .modal .modal-header {
@@ -326,8 +357,105 @@ html {
 }
 
 .modal .modal-close:hover,
-.modal .modal-body .buy-tickets:hover {
+.modal .modal-body .buy-tickets:hover,
+.modal .modal-footer .modal-btn-close:hover {
   background: #ccc;
   color: black;
   cursor: pointer;
+}
+
+.modal .modal-footer {
+  padding: 16px;
+}
+
+.modal .modal-footer .modal-btn-close {
+  border: none;
+  background-color: red;
+  color: white;
+  padding: 12px 16px;
+}
+
+.modal .modal-footer .modal-help {
+  float: right;
+}
+
+.modal .modal-footer a {
+  color: #2196f3;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-140px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contacts-list {
+  margin-bottom: 64px;
+}
+
+.contacts-list .contact-info {
+  list-style: none;
+  font-size: 18px;
+}
+
+.contacts-list .contact-info i {
+  margin-right: 13px;
+  line-height: 1.5;
+}
+
+.contacts-list .contact-input {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+}
+
+.contacts-list .btn-send-contact {
+  float: right;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+}
+
+.contacts-list .btn-send-contact:hover {
+  background-color: #ccc;
+  color: black;
+  cursor: pointer;
+}
+
+.map-section img {
+  width: 100%;
+}
+
+#footer {
+  padding: 64px 16px;
+  text-align: center;
+}
+
+.socials-list {
+  font-size: 24px;
+}
+
+.socials-list > a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.socials-list a:hover {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.socials-list .copyright {
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.socials-list .copyright a {
+  color: rgba(0, 0, 0, 0.6);
 }

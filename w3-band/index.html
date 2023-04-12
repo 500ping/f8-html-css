@@ -115,8 +115,8 @@
                 <li>November <span class="quantity">3</span></li>
               </ul>
 
-              <div class="places-list">
-                <div class="place-item">
+              <div class="places-list row">
+                <div class="place-item column">
                   <img
                     src="https://www.w3schools.com/w3images/newyork.jpg"
                     alt="New York"
@@ -128,10 +128,12 @@
                     <p class="place-desc">
                       Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                     </p>
-                    <a href="#" class="place-buy-btn">Buy Tickets</a>
+                    <button onclick="showBuyTicket()" class="place-buy-btn">
+                      Buy Tickets
+                    </button>
                   </div>
                 </div>
-                <div class="place-item">
+                <div class="place-item column">
                   <img
                     src="https://www.w3schools.com/w3images/paris.jpg"
                     alt="Paris"
@@ -143,10 +145,12 @@
                     <p class="place-desc">
                       Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                     </p>
-                    <a href="#" class="place-buy-btn">Buy Tickets</a>
+                    <button onclick="showBuyTicket()" class="place-buy-btn">
+                      Buy Tickets
+                    </button>
                   </div>
                 </div>
-                <div class="place-item">
+                <div class="place-item column">
                   <img
                     src="https://www.w3schools.com/w3images/sanfran.jpg"
                     alt="San Francisco"
@@ -158,7 +162,9 @@
                     <p class="place-desc">
                       Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                     </p>
-                    <a href="#" class="place-buy-btn">Buy Tickets</a>
+                    <button onclick="showBuyTicket()" class="place-buy-btn">
+                      Buy Tickets
+                    </button>
                   </div>
                 </div>
                 <div class="clear"></div>
@@ -169,16 +175,81 @@
           <div class="content-section">
             <h2 class="section-heading">CONTACT</h2>
             <p class="section-sub-heading">Fan? Drop a note!</p>
+
+            <div class="contacts-list">
+              <div class="row">
+                <div class="column column-half">
+                  <ul class="contact-info">
+                    <li><i class="ti-location-pin"></i> Chicago, US</li>
+                    <li><i class="ti-mobile"></i> Phone: +00 151515</li>
+                    <li><i class="ti-email"></i> Email: mail@mail.com</li>
+                  </ul>
+                </div>
+
+                <div class="column column-half">
+                  <form action="">
+                    <div class="row">
+                      <div class="column column-half">
+                        <input
+                          type="text"
+                          class="contact-input"
+                          placeholder="Name"
+                        />
+                      </div>
+
+                      <div class="column column-half">
+                        <input
+                          type="email"
+                          class="contact-input"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="column column-full mt-8">
+                        <input
+                          type="text"
+                          class="contact-input"
+                          placeholder="Message"
+                        />
+                      </div>
+                    </div>
+                    <button class="mt-16 btn-send-contact">SEND</button>
+                  </form>
+                </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-section">
+            <img
+              src="https://www.w3schools.com/w3images/map.jpg"
+              class="column-full"
+              alt=""
+            />
           </div>
         </div>
       </div>
 
-      <div id="footer"></div>
+      <div id="footer">
+        <div class="socials-list">
+          <a href=""><i class="ti-facebook"></i></a>
+          <a href=""><i class="ti-instagram"></i></a>
+          <a href=""><i class="ti-youtube"></i></a>
+          <a href=""><i class="ti-pinterest"></i></a>
+          <a href=""><i class="ti-twitter"></i></a>
+          <a href=""><i class="ti-linkedin"></i></a>
+          <p class="copyright">Powered by <a href="">w3.css</a></p>
+        </div>
+      </div>
     </div>
 
-    <div class="modal">
+    <div class="modal" onclick="closeBuyTicket()">
       <div class="modal-container">
-        <div class="modal-close"><i class="ti-close"></i></div>
+        <div class="modal-close" onclick="closeBuyTicket()">
+          <i class="ti-close"></i>
+        </div>
         <header class="modal-header">
           <i class="ti-bag" style="margin-right: 15px"></i> Tickets
         </header>
@@ -198,9 +269,30 @@
         </div>
 
         <div class="modal-footer">
+          <button class="modal-btn-close" onclick="closeBuyTicket()">
+            Close <i class="ti-close"></i>
+          </button>
           <p class="modal-help">Need <a href="">help?</a></p>
         </div>
       </div>
     </div>
+
+    <script>
+      const buyTicketModal = document.querySelector(".modal");
+
+      function showBuyTicket() {
+        buyTicketModal.classList.add("modal-open");
+      }
+
+      function closeBuyTicket() {
+        buyTicketModal.classList.remove("modal-open");
+      }
+
+      document
+        .querySelector(".modal-container")
+        .addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+    </script>
   </body>
 </html>
