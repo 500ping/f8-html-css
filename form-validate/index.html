@@ -179,12 +179,18 @@
 
     <script>
       function Validator(options) {
+        var selectorRules = {};
+
         function validate(inputElement, rule) {
           var ParentElement = inputElement.parentElement;
           var errorElement = ParentElement.querySelector(options.errorSelector);
-          var errorMessage = rule.func(inputElement.value);
+          var errorMessage;
 
-          console.log(ParentElement);
+          var rules = selectorRules[rule.selector];
+          for (rule of rules) {
+            errorMessage = rule(inputElement.value);
+            if (errorMessage) break;
+          }
 
           if (errorMessage) {
             errorElement.innerText = errorMessage;
@@ -193,13 +199,52 @@
             errorElement.innerText = "";
             ParentElement.classList.remove("invalid");
           }
+
+          return !errorMessage;
         }
 
         var formElement = document.querySelector(options.form);
 
         if (formElement) {
+          formElement.onsubmit = function (e) {
+            e.preventDefault();
+
+            var isFormValid = true;
+
+            options.rules.forEach(function (rule) {
+              var inputElement = formElement.querySelector(rule.selector);
+              var isValid = validate(inputElement, rule);
+              if (!isValid) {
+                isFormValid = false;
+              }
+            });
+
+            if (isFormValid) {
+              if (typeof options.onSubmit === "function") {
+                var formInputs = formElement.querySelectorAll("[name]");
+                var formValues = Array.from(formInputs).reduce(function (
+                  values,
+                  input
+                ) {
+                  values[input.name] = input.value;
+                  return values;
+                },
+                {});
+
+                options.onSubmit(formValues);
+              }
+            }
+          };
+
           options.rules.forEach(function (rule) {
+            if (Array.isArray(selectorRules[rule.selector])) {
+              selectorRules[rule.selector].push(rule.func);
+            } else {
+              selectorRules[rule.selector] = [rule.func];
+            }
+
             var inputElement = formElement.querySelector(rule.selector);
+
             if (inputElement) {
               inputElement.onblur = function () {
                 validate(inputElement, rule);
@@ -241,15 +286,45 @@
         };
       };
 
+      Validator.minLength = function (selector, min) {
+        return {
+          selector: selector,
+          func: function (value) {
+            return value.length >= min
+              ? undefined
+              : `Vui lòng nhập tối thiểu ${min} ký tự!`;
+          },
+        };
+      };
+
+      Validator.isConfirmed = function (selector, getConfirmValue) {
+        return {
+          selector: selector,
+          func: function (value) {
+            return value === getConfirmValue()
+              ? undefined
+              : `Giá trị nhập vào không chính xác!`;
+          },
+        };
+      };
+
       Validator({
         form: "#form-1",
         errorSelector: ".form-message",
         rules: [
           Validator.isRequired("#fullname"),
-          Validator.isEmail("#email"),
+          Validator.isRequired("#email"),
           Validator.isRequired("#password"),
           Validator.isRequired("#password_confirmation"),
+          Validator.isEmail("#email"),
+          Validator.minLength("#password", 5),
+          Validator.isConfirmed("#password_confirmation", function () {
+            return document.querySelector("#form-1 #password").value;
+          }),
         ],
+        onSubmit: function (data) {
+          console.log(data);
+        },
       });
     </script>
   </body>
